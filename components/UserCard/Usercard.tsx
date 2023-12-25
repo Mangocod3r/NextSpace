@@ -3,9 +3,9 @@ import styles from './UserCard.module.css';
 
 interface Props {
   id: string;
-  name: string | null;
-  age: number | null;
-  image: string | null;
+  name?: string | null | undefined;
+  age?: number | null | undefined;
+  image?: string | null | undefined;
 }
 
 export default function UserCard({ id, name, age, image }: Props) {
