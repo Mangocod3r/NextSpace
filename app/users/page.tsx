@@ -13,36 +13,51 @@
 //     </div>
 //   );
 // }
-// Assuming a generic user type, update this according to your user structure
-type User = {
-  id: string,
-  name: string,
-  age: number,
-  image: string;
-  // Other user properties...
-};
 
+import { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard/Usercard';
 import styles from './page.module.css';
 import { prisma } from '@/lib/prisma';
 
-interface UsersProps {
-  users: User[]; // Specify the type of the 'users' prop
+interface User {
+  id: string;
+  name?: string | null | undefined;
+  bio?: string | null | undefined;
+  age?: number | null | undefined;
+  email?: string | null | undefined;
+  emailVerified?: Date | null | undefined;
+  image?: string | null | undefined;
 }
 
-export async function getServerSideProps() {
-  const users = await prisma.user.findMany();
+export default function Users() {
+  const [users, setUsers] = useState<User[]>([]);
 
-  return {
-    props: { users },
+  const fetchUsers = async () => {
+    try {
+      const fetchedUsers = await prisma.user.findMany();
+      setUsers(fetchedUsers);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   };
-}
 
-export default function Users({ users }: UsersProps) {
+  useEffect(() => {
+    fetchUsers();
+
+    const interval = setInterval(fetchUsers, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.grid}>
       {users.map((user) => (
-        <UserCard key={user.id} {...user} />
+        <UserCard
+          key={user.id}
+          id={user.id}
+          name={user.name ?? ''}
+          age={user.age ?? null}
+          image={user.image ?? null}
+        />
       ))}
     </div>
   );
