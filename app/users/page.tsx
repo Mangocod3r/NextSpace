@@ -13,8 +13,6 @@
 //     </div>
 //   );
 // }
-
-import { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard/Usercard';
 import styles from './page.module.css';
 import { prisma } from '@/lib/prisma';
@@ -29,25 +27,11 @@ interface User {
   image?: string | null | undefined;
 }
 
-export default function Users() {
-  const [users, setUsers] = useState<User[]>([]);
+interface UsersProps {
+  users: User[];
+}
 
-  const fetchUsers = async () => {
-    try {
-      const fetchedUsers = await prisma.user.findMany();
-      setUsers(fetchedUsers);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-
-    const interval = setInterval(fetchUsers, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
+export default function Users({ users }: UsersProps) {
   return (
     <div className={styles.grid}>
       {users.map((user) => (
@@ -61,4 +45,18 @@ export default function Users() {
       ))}
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const users = await prisma.user.findMany();
+    return {
+      props: { users },
+    };
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return {
+      props: { users: [] },
+    };
+  }
 }
