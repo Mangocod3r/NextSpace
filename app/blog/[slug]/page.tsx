@@ -22,7 +22,7 @@ interface Props {
 
 export default async function BlogPostPage({ params }: Props) {
   // deduped
-  const posts: Post[] = await fetch('http://localhost:3000/api/content').then(
+  const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
     (res) => res.json()
   );
   const post = posts.find((post) => post.slug === params.slug)!;
