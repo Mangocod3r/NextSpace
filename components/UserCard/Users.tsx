@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard/Usercard';
-import styles from './Users.module.css'; // Adjust the import based on the actual path and structure
+import styles from './UserCard.module.css'; // Adjust the import based on the actual path and structure
 import { prisma } from '@/lib/prisma';
 
 interface User {
