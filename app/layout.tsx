@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
-import globals from './globals.css'
 import NavMenu from './NavMenu'
 import AuthProvider from './AuthProvider'
 
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <AuthProvider>
     <html lang="en">
-      <body className={globals.body}>
+      <body>
         <NavMenu />
         {children}
       </body>
