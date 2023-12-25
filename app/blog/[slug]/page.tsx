@@ -1,10 +1,10 @@
-export const revalidate = 1200; // not necessary, just for ISR demonstration
+// export const revalidate = 1200; // not necessary, just for ISR demonstration
 
-interface Post {
-  title: string;
-  content: string;
-  slug: string;
-}
+// interface Post {
+//   title: string;
+//   content: string;
+//   slug: string;
+// }
 
 // export async function generateStaticParams() {
 //   const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
@@ -16,21 +16,21 @@ interface Post {
 //   }));
 // }
 
-interface Props {
-  params: { slug: string };
-}
+// interface Props {
+//   params: { slug: string };
+// }
 
-export default async function BlogPostPage({ params }: Props) {
-  // deduped
-  const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
-    (res) => res.json()
-  );
-  const post = posts.find((post) => post.slug === params.slug)!;
+// export default async function BlogPostPage({ params }: Props) {
+//   // deduped
+//   const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
+//     (res) => res.json()
+//   );
+//   const post = posts.find((post) => post.slug === params.slug)!;
 
-  return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <h1>{post.title}</h1>
+//       <p>{post.content}</p>
+//     </div>
+//   );
+// }
