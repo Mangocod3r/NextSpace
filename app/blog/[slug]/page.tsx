@@ -6,15 +6,15 @@ interface Post {
   slug: string;
 }
 
-export async function generateStaticParams() {
-  const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
-    (res) => res.json()
-  );
+// export async function generateStaticParams() {
+//   const posts: Post[] = await fetch(`${process.env.NEXTAUTH_URL}/api/content`).then(
+//     (res) => res.json()
+//   );
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
 
 interface Props {
   params: { slug: string };
