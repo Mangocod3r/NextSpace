@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { ProfileForm } from './ProfileForm';
 import { redirect } from 'next/navigation';
 import { SignOutButton } from '@/components/buttons';
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { authOptions } from '../utils/authOptions';
 
 
 export default async function Dashboard() {
